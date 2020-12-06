@@ -1,6 +1,6 @@
 # veganAPI
 
-<img src="img/veganapi_logo.png" width="350"/> <img src="img/reprograma_logo.png" width="350"/>
+<img src="img/veganapi_logo.png" width="380"/> <img src="img/reprograma_logo.png" width="380"/>
 
 ## Descrição
 
