@@ -17,6 +17,11 @@ const produtoSchema = new Schema({
         type: String,
         required: false
     },
+    tipo: {
+        type: Schema.Types.ObjectId,
+        ref: 'tipoCollection',
+        required: false
+    },
     fabricante: {
         type: String,
         required: "Este campo é obrigatório."
@@ -25,23 +30,21 @@ const produtoSchema = new Schema({
         type: Boolean,
         required: "Este campo é obrigatório."
     },
-    ingredientesorigemanimal: [{
-        type: String,
+    ingredientesorigemanimal: {
+        type: Array,
+        default: null,
         required: false
-    }], 
+    }, 
     imagem_url: {
         type: String,
         required: false
-    },
-    dataultimaconsulta: {
-        type: String,
-        required: "Este campo é obrigatório."
     },
     observacao: {
         type: String,
         required: false
     }
-})
+},
+{ timestamps: true })
 
 const produtoCollection = mongoose.model('produtos', produtoSchema)
 
