@@ -34,4 +34,3 @@ PUT | /tipo/:_id | Altera um tipo.
 DELETE | /tipo/:_id | Deleta um tipo.
 
 ## TODO
-
