@@ -1,4 +1,5 @@
 const tipoCollection = require("../models/tipoSchema")
+const { API_PATH } = require("../conf")
 
 const getAll = (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
