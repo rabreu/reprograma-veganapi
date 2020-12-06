@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const { API_PATH } = require('./conf')
 
 const db = require("./models/repository")
 db.connect()
@@ -9,6 +10,6 @@ const routes = require("./routes/produtoRoutes")
 
 app.use(cors())
 app.use(express.json())
-app.use('/', routes)
+app.use(API_PATH, routes)
 
 module.exports = app
