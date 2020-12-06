@@ -1,6 +1,7 @@
 const tipoCollection = require("../models/tipoSchema")
 
 const getAll = (req, res) => {
+    console.log(`${req.method} ${API_PATH}${req.url}`)
     tipoCollection.find((err, tipos) => {
         if(err)
             res.status(500).send(err);
@@ -11,12 +12,14 @@ const getAll = (req, res) => {
 }
 
 const addTipo = async (req, res) => {
+    console.log(`${req.method} ${API_PATH}${req.url}`)
     const tipoBody = req.body;
     const tipo = await tipoCollection.create(tipoBody);
     return res.status(201).send(tipo);
 }
 
 const updateTipo = (req, res) => {
+    console.log(`${req.method} ${API_PATH}${req.url}`)
     const id = req.params.id
     const tipoBody = req.body;
     tipoCollection.findByIdAndUpdate(id, tipoBody, { new: true }, (err, tipo) => {
@@ -27,6 +30,7 @@ const updateTipo = (req, res) => {
 }
 
 const deleteTipo = (req, res) => {
+    console.log(`${req.method} ${API_PATH}${req.url}`)
     const id = req.params.id;
     tipoCollection.findByIdAndDelete(id, (err, tipo) => {
         if(err)
