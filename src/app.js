@@ -17,5 +17,8 @@ app.use(express.json())
 app.use(API_PATH, indexRoute)
 app.use(API_PATH, produtoRoutes)
 app.use(API_PATH, tipoRoutes)
+app.use("/", (req, res) => {
+    res.status(302).redirect(API_PATH);
+})
 
 module.exports = app
