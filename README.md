@@ -16,6 +16,7 @@
  - [mongoose](https://www.npmjs.com/package/mongoose)
  - [express](https://www.npmjs.com/package/express)
  - [cors](https://www.npmjs.com/package/cors)
+ - [dotenv](https://www.npmjs.com/package/dotenv)
 
 ## Endpoints
 
@@ -34,3 +35,7 @@ PUT | /tipo/:_id | Altera um tipo.
 DELETE | /tipo/:_id | Deleta um tipo.
 
 ## TODO
+
+- Cadastro de usuários
+- Submissão de revisão de informações por parte dos usuários
+- 
