@@ -1,8 +1,10 @@
 const produtoCollection = require("../models/produtoSchema")
 const Produto = require('../models/Produto')
 const ProdutoDTO = require('../DTO/ProdutoDTO')
-const { API_PATH } = require('../conf')
 const tipoCollection = require("../models/tipoSchema")
+const dotenv = require('dotenv')
+dotenv.config()
+const API_PATH = process.env.API_PATH
 
 
 const getProdutos = async (req, res) => {

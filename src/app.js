@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const { API_PATH } = require('./conf')
+const dotenv = require('dotenv')
+dotenv.config()
+const API_PATH = process.env.API_PATH
 
 const db = require("./models/repository")
 db.connect()

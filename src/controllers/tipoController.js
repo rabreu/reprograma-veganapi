@@ -1,5 +1,7 @@
 const tipoCollection = require("../models/tipoSchema")
-const { API_PATH } = require("../conf")
+const dotenv = require('dotenv')
+dotenv.config()
+const API_PATH = process.env.API_PATH
 
 const getAll = (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)

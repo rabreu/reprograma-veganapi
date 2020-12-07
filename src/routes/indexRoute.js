@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { API_PATH } = require('../conf')
+const dotenv = require('dotenv')
+dotenv.config()
+const API_PATH = process.env.API_PATH
 
 router.get('/', (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`);
