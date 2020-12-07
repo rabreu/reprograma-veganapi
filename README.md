@@ -4,7 +4,9 @@
 
 ## Descrição
 
+## Arquitetura
 
+![](img/api.png)
 
 ## Ferramentas / Dependências
 
