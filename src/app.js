@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 const API_PATH = process.env.API_PATH
 
-const db = require("./models/repository")
+const db = require("./confs/database")
 db.connect()
 
 const indexRoute = require("./routes/indexRoute")
