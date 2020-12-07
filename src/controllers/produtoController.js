@@ -79,12 +79,11 @@ const addProdutos = async (req, res) => {
     const produtos = req.body;
     new Promise((resolve, reject) => {
         let produtosAdicionados = []
-        produtos.map(async (produto, index) => {
+        produtos.map(async (produto) => {
             const { nome, sabor, tipo, fabricante, vegan, ingredientesorigemanimal, imagem_url, dataultimaconsulta, observacao } = produto;
             const produtoObj = new Produto(nome, sabor, tipo, fabricante, vegan, ingredientesorigemanimal, imagem_url, dataultimaconsulta, observacao);
             await produtoCollection.create(produtoObj)
                 .then((produto) => {
-                    console.log(index)
                     produtosAdicionados.push(produto)
                     if (index == produtos.length - 1)
                         resolve(produtosAdicionados)
