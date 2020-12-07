@@ -5,6 +5,6 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT
 const API_PATH = process.env.API_PATH
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
     console.log(`VeganAPI server running on http://${HOST}:${PORT}${API_PATH}.`)
 })
