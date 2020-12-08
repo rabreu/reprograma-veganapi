@@ -38,6 +38,8 @@ const deleteTipo = (req, res) => {
     tipoCollection.findByIdAndDelete(id, (err, tipo) => {
         if(err)
             return res.status(500).send(err);
+        if(!tipo)
+            return res.status(404).send("Tipo não localizado.");
         return res.status(200).send("Tipo apagado.");
     })
 }
