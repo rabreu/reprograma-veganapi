@@ -111,7 +111,7 @@ const addProdutos = async (req, res) => {
 //     return res.json(produto)
 // };
 
-const editProduto = (req, res) => {
+const updateProduto = (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const id = req.params.id
     const produtoBody = req.body;
@@ -147,6 +147,6 @@ module.exports = {
     getProdutoById,
     addProduto,
     addProdutos,
-    editProduto,
+    updateProduto,
     deleteProduto
 }
