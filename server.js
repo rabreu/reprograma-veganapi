@@ -1,7 +1,7 @@
 const app = require('./src/app')
 const dotenv = require('dotenv')
 dotenv.config()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8080
 const API_PATH = process.env.API_PATH
 
 app.listen(PORT, () => {
