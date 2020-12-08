@@ -1,5 +1,4 @@
 const produtoCollection = require("../models/produtoSchema")
-const Produto = require('../models/Produto')
 const ProdutoDTO = require('../DTO/ProdutoDTO')
 const tipoCollection = require("../models/tipoSchema")
 const dotenv = require('dotenv')
@@ -15,7 +14,7 @@ const getProdutos = async (req, res) => {
             tipoCollection.findOne({ nome: query.tipo }, (err, tipo) => {
                 if (err)
                     return res.send(500).send(err);
-                if(!tipo)
+                if (!tipo)
                     return res.status(500).send("Este tipo não existe.");
                 resolve(tipo._id);
             })
@@ -40,8 +39,9 @@ const getProdutos = async (req, res) => {
             .then(data => {
                 return res.status(200).send(data);
             })
-
-
+            .catch(err => {
+                res.status(500).send(err);
+            })
     })
 }
 
@@ -63,9 +63,8 @@ const getProdutoById = (req, res) => {
 
 const addProduto = (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
-    const { nome, sabor, tipo, fabricante, vegan, ingredientesorigemanimal, imagem_url, dataultimaconsulta, observacao } = req.body;
-    const produto = new Produto(nome, sabor, tipo, fabricante, vegan, ingredientesorigemanimal, imagem_url, dataultimaconsulta, observacao);
-    const saveProduto = new produtoCollection(produto);
+    const produtoBody = req.body;
+    const saveProduto = new produtoCollection(produtoBody);
     saveProduto.save((err) => {
         if (err)
             return res.status(400).send(err);
@@ -73,29 +72,26 @@ const addProduto = (req, res) => {
             .then(produto => {
                 return res.status(201).send(produto);
             })
+            .catch((err) => {
+                return res.status(500).send(err);
+            })
     })
 }
 
 const addProdutos = async (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const produtos = req.body;
-    new Promise((resolve, reject) => {
-        let produtosAdicionados = []
-        produtos.map(async (produto) => {
-            const { nome, sabor, tipo, fabricante, vegan, ingredientesorigemanimal, imagem_url, dataultimaconsulta, observacao } = produto;
-            const produtoObj = new Produto(nome, sabor, tipo, fabricante, vegan, ingredientesorigemanimal, imagem_url, dataultimaconsulta, observacao);
-            await produtoCollection.create(produtoObj)
-                .then((produto) => {
-                    produtosAdicionados.push(produto)
-                    if (index == produtos.length - 1)
-                        resolve(produtosAdicionados)
+    Promise.all(produtos.map((produto) => {
+        return new Promise((resolve, reject) => {
+            produtoCollection.create(produto)
+                .then((produtoAdicionado) => {
+                    resolve(produtoAdicionado)
                 })
                 .catch((err) => {
                     reject(err)
                 })
-
         })
-    })
+    }))
         .then((produtosAdicionados) => {
             return res.status(201).send(produtosAdicionados);
         })
@@ -124,8 +120,7 @@ const editProduto = (req, res) => {
 
 const deleteProduto = (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
-    const id = re
-    q.params.id
+    const id = req.params.id;
     produtoCollection.findByIdAndDelete(id, (err, produto) => {
         if (err)
             return res.status(400).send(err);

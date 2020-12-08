@@ -18,9 +18,10 @@ class ProdutoDTO {
     getReferences = () => {
         return new Promise(async (resolve, reject) => {
             await tipoCollection.findById(this.tipo, (err, tipo) => {
-                if(err)
-                    reject(err)
-                this.tipo = tipo.nome;
+                if (err)
+                    reject(err);
+                else if (tipo)
+                    this.tipo = tipo.nome;
             })
             resolve(this)
         })
