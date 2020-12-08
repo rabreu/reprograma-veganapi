@@ -115,7 +115,7 @@ const editProduto = (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const id = req.params.id
     const produtoBody = req.body;
-    produtoCollection.findByIdAndUpdate(id, produtoBody, { new: true }, (err, produto) => {
+    produtoCollection.findByIdAndUpdate(id, produtoBody, { new: true, useFindAndModify: false }, (err, produto) => {
         if (err)
             return res.status(500).send(err);
         if (!produto)
