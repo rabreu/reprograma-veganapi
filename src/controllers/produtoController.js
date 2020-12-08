@@ -85,7 +85,13 @@ const addProdutos = async (req, res) => {
         return new Promise((resolve, reject) => {
             produtoCollection.create(produto)
                 .then((produtoAdicionado) => {
-                    resolve(produtoAdicionado)
+                    new ProdutoDTO(produtoAdicionado).getReferences()
+                        .then(produtoDTO => {
+                            resolve(produtoDTO);
+                        })
+                        .catch(err => {
+                            reject(err);
+                        })
                 })
                 .catch((err) => {
                     reject(err)
@@ -114,7 +120,13 @@ const editProduto = (req, res) => {
             return res.status(500).send(err);
         if (!produto)
             return res.status(404).send({ mensagem: "Produto não encontrado. :(" });
-        return res.status(200).send(produto);
+        new ProdutoDTO(produto).getReferences()
+            .then(produtoDTO => {
+                return res.status(200).send(produtoDTO);
+            })
+            .catch(err => {
+                return res.status(500).send(err);
+            })
     })
 }
 
