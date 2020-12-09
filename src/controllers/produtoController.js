@@ -14,9 +14,9 @@ const getProdutos = async (req, res) => {
             tipoCollection.findOne({ nome: query.tipo }, (err, tipo) => {
                 if (err)
                     return res.send(500).send(err);
-                if (!tipo)
-                    return res.status(500).send(new ErrorMessage("Este tipo não existe."));
-                resolve(tipo._id);
+                if (tipo)
+                    resolve(tipo._id);
+                resolve(null);
             })
         })
     }
@@ -28,7 +28,7 @@ const getProdutos = async (req, res) => {
         Promise.all(produtos.map(produto => {
             return new Promise((resolve, reject) => {
                 produto.populate('tipo', (err, produto) => {
-                    if(err)
+                    if (err)
                         reject(err);
                     else
                         resolve(produto);
@@ -81,7 +81,7 @@ const addProdutos = async (req, res) => {
             produtoCollection.create(produto)
                 .then((produtoAdicionado) => {
                     produtoAdicionado.populate('tipo', (err, produto) => {
-                        if(err)
+                        if (err)
                             reject(err);
                         else
                             resolve(produto);
