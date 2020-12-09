@@ -1,5 +1,6 @@
 const produtoCollection = require("../models/produtoSchema")
 const tipoCollection = require("../models/tipoSchema")
+const ErrorMessage = require("../helpers/ErrorMessage")
 const dotenv = require('dotenv')
 dotenv.config()
 const API_PATH = process.env.API_PATH
@@ -14,7 +15,7 @@ const getProdutos = async (req, res) => {
                 if (err)
                     return res.send(500).send(err);
                 if (!tipo)
-                    return res.status(500).send("Este tipo não existe.");
+                    return res.status(500).send(new ErrorMessage("Este tipo não existe."));
                 resolve(tipo._id);
             })
         })
@@ -23,7 +24,7 @@ const getProdutos = async (req, res) => {
         if (err)
             return res.status(400).send(err);
         if (produtos.length < 1)
-            return res.status(404).send({ mensagem: "Não foram encontrados produtos com estes critérios. :(" });
+            return res.status(404).send(new ErrorMessage("Não foram encontrados produtos com estes critérios. :("));
         Promise.all(produtos.map(produto => {
             return new Promise((resolve, reject) => {
                 produto.populate('tipo', (err, produto) => {
@@ -49,7 +50,7 @@ const getProdutoById = async (req, res) => {
     produtoCollection.findById(id).populate('tipo')
         .then(produto => {
             if (!produto)
-                return res.status(404).send({ mensagem: "Produto não encontrado. :(" });
+                return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
             return res.status(200).send(produto);
         })
         .catch(err => {
@@ -107,7 +108,7 @@ const updateProduto = (req, res) => {
         if (err)
             return res.status(500).send(err);
         if (!produto)
-            return res.status(404).send({ mensagem: "Produto não encontrado. :(" });
+            return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
         produto.populate('tipo', (err, produto) => {
             if (err)
                 return res.status(500).send(err);
@@ -123,8 +124,8 @@ const deleteProduto = (req, res) => {
         if (err)
             return res.status(400).send(err);
         if (!produto)
-            return res.status(404).send({ mensagem: "Produto não encontrado. :(" });
-        return res.status(200).send({ mensagem: "Produto apagado." });
+            return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
+        return res.status(200).send(new ErrorMessage("Produto apagado."));
     })
 }
 
