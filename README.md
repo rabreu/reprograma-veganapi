@@ -62,14 +62,7 @@ POST | /tipos | Adiciona um tipo.
 PUT | /tipo/:_id | Altera um tipo.
 DELETE | /tipo/:_id | Deleta um tipo.
 
-### Exemplos de objetos
-```
-{
-    "_id": "5fce3510e488f0085c1cd8d0",
-    "nome": "Alimentício",
-    "__v": 0
-}
-```
+### Exemplo de um produto
 
 ```
 {
