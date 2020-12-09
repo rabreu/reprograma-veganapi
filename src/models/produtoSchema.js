@@ -13,7 +13,7 @@ const produtoSchema = new Schema({
     },
     tipo: {
         type: Schema.Types.ObjectId,
-        ref: 'tipoCollection',
+        ref: 'tipos',
         required: false
     },
     fabricante: {

@@ -1,5 +1,4 @@
 const produtoCollection = require("../models/produtoSchema")
-const ProdutoDTO = require('../DTO/ProdutoDTO')
 const tipoCollection = require("../models/tipoSchema")
 const dotenv = require('dotenv')
 dotenv.config()
@@ -27,13 +26,12 @@ const getProdutos = async (req, res) => {
             return res.status(404).send({ mensagem: "Não foram encontrados produtos com estes critérios. :(" });
         Promise.all(produtos.map(produto => {
             return new Promise((resolve, reject) => {
-                new ProdutoDTO(produto).getReferences()
-                    .then(produtoDTO => {
-                        resolve(produtoDTO);
-                    })
-                    .catch(err => {
+                produto.populate('tipo', (err, produto) => {
+                    if(err)
                         reject(err);
-                    })
+                    else
+                        resolve(produto);
+                })
             })
         }))
             .then(data => {
@@ -45,36 +43,32 @@ const getProdutos = async (req, res) => {
     })
 }
 
-const getProdutoById = (req, res) => {
+const getProdutoById = async (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const { id } = req.params
-    produtoCollection.findById(id, (err, produto) => {
-        if (err)
+    produtoCollection.findById(id).populate('tipo')
+        .then(produto => {
+            if (!produto)
+                return res.status(404).send({ mensagem: "Produto não encontrado. :(" });
+            return res.status(200).send(produto);
+        })
+        .catch(err => {
             return res.status(500).send(err);
-        if (!produto)
-            return res.status(404).send({ mensagem: "Produto não encontrado. :(" });
-        produtoDTO = new ProdutoDTO(produto);
-        produtoDTO.getReferences()
-            .then(produto => {
-                return res.status(200).send(produto);
-            })
-    })
+        })
 }
 
-const addProduto = (req, res) => {
+const addProduto = async (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const produtoBody = req.body;
     const saveProduto = new produtoCollection(produtoBody);
-    saveProduto.save((err) => {
+    saveProduto.save((err, produto) => {
         if (err)
-            return res.status(400).send(err);
-        new ProdutoDTO(saveProduto).getReferences()
-            .then(produto => {
-                return res.status(201).send(produto);
-            })
-            .catch((err) => {
+            return res.status(500).send(err);
+        produto.populate('tipo', (err, produto) => {
+            if (err)
                 return res.status(500).send(err);
-            })
+            return res.status(201).send(produto);
+        });
     })
 }
 
@@ -85,13 +79,12 @@ const addProdutos = async (req, res) => {
         return new Promise((resolve, reject) => {
             produtoCollection.create(produto)
                 .then((produtoAdicionado) => {
-                    new ProdutoDTO(produtoAdicionado).getReferences()
-                        .then(produtoDTO => {
-                            resolve(produtoDTO);
-                        })
-                        .catch(err => {
+                    produtoAdicionado.populate('tipo', (err, produto) => {
+                        if(err)
                             reject(err);
-                        })
+                        else
+                            resolve(produto);
+                    })
                 })
                 .catch((err) => {
                     reject(err)
@@ -106,11 +99,6 @@ const addProdutos = async (req, res) => {
         })
 }
 
-// const addProduto = async (req, res) => {
-//     const produto =  await produtoCollection.create(req.body);
-//     return res.json(produto)
-// };
-
 const updateProduto = (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const id = req.params.id
@@ -120,13 +108,11 @@ const updateProduto = (req, res) => {
             return res.status(500).send(err);
         if (!produto)
             return res.status(404).send({ mensagem: "Produto não encontrado. :(" });
-        new ProdutoDTO(produto).getReferences()
-            .then(produtoDTO => {
-                return res.status(200).send(produtoDTO);
-            })
-            .catch(err => {
+        produto.populate('tipo', (err, produto) => {
+            if (err)
                 return res.status(500).send(err);
-            })
+            return res.status(200).send(produto);
+        })
     })
 }
 
