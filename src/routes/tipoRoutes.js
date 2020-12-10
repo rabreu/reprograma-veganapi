@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/tipos', controller.getAll);
+router.get('/tipos/:id', controller.getById);
 router.post('/tipos', controller.addTipo);
 router.patch('/tipos/:id', controller.updateTipo);
 router.delete('/tipos/:id', controller.deleteTipo);

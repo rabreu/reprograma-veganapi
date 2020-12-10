@@ -15,6 +15,18 @@ const getAll = (req, res) => {
     })
 }
 
+const getById = (req, res) => {
+    console.log(`${req.method} ${API_PATH}${req.url}`)
+    const id = req.params.id;
+    tipoCollection.findById(id, (err, tipo) => {
+        if(err)
+            return res.status(500).send(new ErrorMessage(500, err));
+        if(!tipo)
+            return res.status(200).send(new Message("Tipo não localizado."));
+        return res.status(200).send(tipo);
+    })
+}
+
 const addTipo = async (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const tipoBody = req.body;
@@ -47,6 +59,7 @@ const deleteTipo = (req, res) => {
 
 module.exports = {
     getAll,
+    getById,
     addTipo,
     updateTipo,
     deleteTipo

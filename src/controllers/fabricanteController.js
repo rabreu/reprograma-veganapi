@@ -16,6 +16,18 @@ const getAll = (req, res) => {
     })
 }
 
+const getById = (req, res) => {
+    console.log(`${req.method} ${API_PATH}${req.url}`)
+    const id = req.params.id;
+    fabricanteCollection.findById(id, (err, fabricante) => {
+        if(err)
+            return res.status(500).send(new ErrorMessage(500, err));
+        if(!fabricante)
+            return res.status(200).send(new Message("Fabricante não localizado."));
+        return res.status(200).send(fabricante);
+    })
+}
+
 const addFabricante = async (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const fabricanteBody = req.body;
@@ -53,6 +65,7 @@ const deleteFabricante = (req, res) => {
 
 module.exports = {
     getAll,
+    getById,
     addFabricante,
     updateFabricante,
     deleteFabricante
