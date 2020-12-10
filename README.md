@@ -2,9 +2,11 @@
 
 <img src="img/veganapi_logo.png" width="410"/> <img src="img/reprograma_logo.png" width="410"/>
 
-## Problema
+## Descrição
 
-## Solução
+A ideia do veganAPI surgiu pela dificuldade de encontrar e diferenciar um produto vegano de um não vegano e para uma pessoa sem experiência (ou às vezes até mesmo com), pode ser uma tarefa difícil e com algumas armadilhas.
+
+Uma das maneiras de combater o especísmo e a exploração animal é difundir a informação e oferecer alternativas de consumo. Muitas vezes as pessoas não estão dispostas a realizar grandes mudanças de hábitos para esta causa, porém mesmo que uma pessoa não adote uma postura restritamente vegana, existem alguns produtos de rotina que podem ser substituídos por opções veganas, com pouco ou nenhum impácto na rotina ou financeiro.
 
 ## Arquitetura
 
@@ -34,8 +36,10 @@ sabor | String | Sabor do produto | Não
 tipo | ObjectId | Tipo do produto | Sim
 fabricante | ObjectId | Fabricante do produto | Sim
 vegan | Boolean | Se o produto é vegan ou não | Sim
+media_preco | Number | Média de preço do produto | Não
 ingredientesorigemanimal | Array | Lista contendo os ingredientes de origem animal | Não
 imagem_url | String | URL para imagem do produto | Sim
+media_preco | Preço | Média de preço do produto | Sim
 observacao | String | Campo livre para observação | Não
 createdAt | Date | Data de criação gerada automaticamente | -
 updatedAt | Date | Data do último update gerada automaticamente | -
@@ -100,3 +104,4 @@ Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV
 - Submissão de revisão de informações por parte dos usuários
 - Versões do mesmo produto por país, pois a receita é comumente alterada conforme a região.
 - Cadastro de ingredientes que não sejam veganos e explicação.
+- Calcular média de preços, com base de informações reportadas pelos usuários.
