@@ -22,6 +22,18 @@ const getProdutos = async (req, res) => {
             })
         })
     }
+    if (query.hasOwnProperty("preco_min") || query.hasOwnProperty("preco_max")) {
+        let priceFilter = {};
+        if (query.hasOwnProperty("preco_min")) {
+            priceFilter["$gte"] = query.preco_min;
+            delete query["preco_min"];
+        }
+        if (query.hasOwnProperty("preco_max")) {
+            priceFilter["$lte"] = query.preco_max;
+            delete query["preco_max"];
+        }
+        query["media_preco"] = priceFilter;
+    }
     produtoCollection.find(query, (err, produtos) => {
         if (err)
             res.status(500).send(new ErrorMessage(500, err));
