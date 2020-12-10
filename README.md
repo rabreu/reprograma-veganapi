@@ -58,24 +58,24 @@ observacao | String | Campo livre para observação sobre o fabricante | Não
 
 ## Endpoints
 
-Método | Caminho | Descrição
------- | ------- | ---------:
-GET | /produtos | Retorna uma lista de produtos, podendo ser filtrada por parâmetro
-GET | /produtos/:_id | Retorna um produto por id
-POST | /produtos | Adiciona um produto
-POST | /produtos/lista | Adiciona uma _array_ de produtos
-PATCH | /produtos/:_id | Altera um produto
-DELETE | /produto/:_id | Apaga um produto
-GET | /tipos | Retorna todos os tipos
-GET | /tipos/:_id | Retorna um tipo
-POST | /tipos | Adiciona um tipo
-PATCH | /tipos/:_id | Altera um tipo
-DELETE | /tipos/:_id | Apaga um tipo
-GET | /fabricantes | Retorna todos os fabricantes
-GET | /fabricantes/:_id | Retorna um fabricante
-POST | /fabricantes | Adiciona um fabricante
-PATCH | /fabricante/:_id | Altera um fabricante
-DELETE | /fabricante/:_id | Apaga um fabricante
+Método | Caminho | Parâmetros | Descrição
+------ | ------- | ------- | ---------:
+GET | /produtos | nome, vegan, tipo, preco_min, preco max | Retorna uma lista de produtos, podendo ser filtrada por parâmetros
+GET | /produtos/:_id | - | Retorna um produto por id
+POST | /produtos | - | Adiciona um produto
+POST | /produtos/lista | - | Adiciona uma _array_ de produtos
+PATCH | /produtos/:_id | - | Altera um produto
+DELETE | /produto/:_id | - | Apaga um produto
+GET | /tipos | - | Retorna todos os tipos
+GET | /tipos/:_id | - | Retorna um tipo
+POST | /tipos | - | Adiciona um tipo
+PATCH | /tipos/:_id | - | Altera um tipo
+DELETE | /tipos/:_id | - | Apaga um tipo
+GET | /fabricantes | - | Retorna todos os fabricantes
+GET | /fabricantes/:_id | - | Retorna um fabricante
+POST | /fabricantes | - | Adiciona um fabricante
+PATCH | /fabricante/:_id | - | Altera um fabricante
+DELETE | /fabricante/:_id | - | Apaga um fabricante
 
 Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV4YvT).
 
@@ -101,7 +101,7 @@ Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV
 ## TODO
 
 - Cadastro de usuários
-- Submissão de revisão de informações por parte dos usuários
+- Submissão e revisão de informações enviada por usuários
 - Versões do mesmo produto por país, pois a receita é comumente alterada conforme a região.
 - Cadastro de ingredientes que não sejam veganos e explicação.
 - Calcular média de preços, com base de informações reportadas pelos usuários.
