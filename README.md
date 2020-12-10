@@ -66,22 +66,17 @@ DELETE | /tipo/:_id | Deleta um tipo.
 
 ```
 {
+    "_id": "5fcd57a039b60012dcfecaae",
+    "nome": "Margarina Becel",
+    "tipo": "Alimentício",
+    "fabricante": "Unilever",
+    "vegan": false,
     "ingredientesorigemanimal": [
         "Vitamina D3"
     ],
-    "_id": "5fcd57a039b60012dcfecaae",
-    "nome": "Margarina Becel",
-    "tipo": {
-        "_id": "5fccec53c4568c120829bb37",
-        "nome": "Alimentício",
-        "__v": 0
-    },
-    "fabricante": "Unilever",
-    "vegan": false,
     "imagem_url": "https://casafiesta.fbitsstatic.net/img/p/creme-vegetal-becel-original-com-sal-250g-86113/251869.jpg",
-    "createdAt": "2020-12-06T22:13:52.361Z",
-    "updatedAt": "2020-12-06T22:13:52.361Z",
-    "__v": 0
+    "data_criacao": "2020-12-06T22:13:52.361Z",
+    "data_ultima_atualizacao": "2020-12-06T22:13:52.361Z"
 }
 ```
 
