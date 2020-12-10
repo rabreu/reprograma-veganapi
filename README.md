@@ -28,17 +28,17 @@
 ### Produto
 Campo | Tipo | Descrição | Obrigatório?
 ----- | ---- | --------- | -----------:
-_id | ObjectId | Id gerado automaticamente. | -
-nome | String | Nome do produto. | Sim
-sabor | String | Sabor do produto. | Não
-tipo | ObjectId | Tipo do produto. | Sim
-fabricante | String | Fabricante do produto. | Sim
-vegan | Boolean | Se o produto é vegan ou não. | Sim
-ingredientesorigemanimal | Array | Lista contendo os ingredientes de origem animal. | Não
-imagem_url | String | URL para imagem do produto. | Sim
-observacao | String | Campo livre para observação. | Não
-createdAt | Date | Data de criação gerada automaticamente. | -
-updatedAt | Date | Data do último update gerada automaticamente. | -
+_id | ObjectId | Id gerado automaticamente | -
+nome | String | Nome do produto | Sim
+sabor | String | Sabor do produto | Não
+tipo | ObjectId | Tipo do produto | Sim
+fabricante | ObjectId | Fabricante do produto | Sim
+vegan | Boolean | Se o produto é vegan ou não | Sim
+ingredientesorigemanimal | Array | Lista contendo os ingredientes de origem animal | Não
+imagem_url | String | URL para imagem do produto | Sim
+observacao | String | Campo livre para observação | Não
+createdAt | Date | Data de criação gerada automaticamente | -
+updatedAt | Date | Data do último update gerada automaticamente | -
 
 ### Tipo
 Campo | Tipo | Descrição | Obrigatório?
@@ -57,24 +57,24 @@ observacao | String | Campo livre para observação sobre o fabricante | Não
 
 Método | Caminho | Descrição
 ------ | ------- | ---------:
-GET | /produtos | Retorna uma lista de produtos, podendo ser filtrada por parâmetro.
-GET | /produtos/:_id | Retorna um produto por id.
-POST | /produtos | Adiciona um produto.
-POST | /produtos/lista | Adiciona uma _array_ de produtos.
-PATCH | /produtos/:_id | Altera um produto.
-DELETE | /produto/:_id | Deleta um produto.
-GET | /tipos | Retorna todos os tipos.
-GET | /tipos/:_id | Retorna um tipo.
-POST | /tipos | Adiciona um tipo.
-PATCH | /tipos/:_id | Altera um tipo.
-DELETE | /tipos/:_id | Deleta um tipo.
-GET | /fabricantes | Retorna todos os fabricantes.
-GET | /fabricantes/:_id | Retorna um fabricante.
-POST | /fabricantes | Adiciona um fabricante.
-PATCH | /fabricante/:_id | Altera um fabricante.
-DELETE | /fabricante/:_id | Deleta um fabricante.
+GET | /produtos | Retorna uma lista de produtos, podendo ser filtrada por parâmetro
+GET | /produtos/:_id | Retorna um produto por id
+POST | /produtos | Adiciona um produto
+POST | /produtos/lista | Adiciona uma _array_ de produtos
+PATCH | /produtos/:_id | Altera um produto
+DELETE | /produto/:_id | Deleta um produto
+GET | /tipos | Retorna todos os tipos
+GET | /tipos/:_id | Retorna um tipo
+POST | /tipos | Adiciona um tipo
+PATCH | /tipos/:_id | Altera um tipo
+DELETE | /tipos/:_id | Deleta um tipo
+GET | /fabricantes | Retorna todos os fabricantes
+GET | /fabricantes/:_id | Retorna um fabricante
+POST | /fabricantes | Adiciona um fabricante
+PATCH | /fabricante/:_id | Altera um fabricante
+DELETE | /fabricante/:_id | Deleta um fabricante
 
-[Postman](https://documenter.getpostman.com/view/10647633/TVmV4YvT)
+Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV4YvT).
 
 ### Exemplo de um produto
 
