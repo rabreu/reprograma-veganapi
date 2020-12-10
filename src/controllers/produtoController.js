@@ -1,7 +1,7 @@
 const produtoCollection = require("../models/produtoSchema")
 const tipoCollection = require("../models/tipoSchema")
 const ErrorMessage = require("../helpers/ErrorMessage")
-const ProdutoDTO = require("../DTO/produtoDTO")
+const ProdutoDTO = require("../DTO/ProdutoDTO")
 const API_PATH = process.env.API_PATH
 const dotenv = require('dotenv')
 
