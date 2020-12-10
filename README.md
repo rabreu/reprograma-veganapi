@@ -6,7 +6,7 @@
 
 A ideia do veganAPI surgiu pela dificuldade de encontrar e diferenciar um produto vegano de um não vegano e para uma pessoa sem experiência (ou às vezes até mesmo com), pode ser uma tarefa difícil e com algumas armadilhas.
 
-Uma das maneiras de combater o especísmo e a exploração animal é difundir a informação e oferecer alternativas de consumo. Muitas vezes as pessoas não estão dispostas a realizar grandes mudanças de hábitos para esta causa, porém mesmo que uma pessoa não adote uma postura restritamente vegana, existem alguns produtos de rotina que podem ser substituídos por opções veganas, com pouco ou nenhum impácto na rotina ou financeiro.
+Uma das maneiras de combater o especísmo e a exploração animal é difundir a informação e oferecer alternativas de consumo. Muitas vezes as pessoas não estão dispostas a realizar grandes mudanças de hábitos para esta causa, porém mesmo que uma pessoa não adote uma postura restritamente vegana, existem alguns produtos de rotina que podem ser substituídos por opções veganas, com pouco ou nenhum impacto na rotina ou no financeiro.
 
 ## Arquitetura
 
@@ -39,7 +39,6 @@ vegan | Boolean | Se o produto é vegan ou não | Sim
 media_preco | Number | Média de preço do produto | Não
 ingredientesorigemanimal | Array | Lista contendo os ingredientes de origem animal | Não
 imagem_url | String | URL para imagem do produto | Sim
-media_preco | Preço | Média de preço do produto | Sim
 observacao | String | Campo livre para observação | Não
 createdAt | Date | Data de criação gerada automaticamente | -
 updatedAt | Date | Data do último update gerada automaticamente | -
@@ -66,17 +65,17 @@ GET | /produtos/:_id | Retorna um produto por id
 POST | /produtos | Adiciona um produto
 POST | /produtos/lista | Adiciona uma _array_ de produtos
 PATCH | /produtos/:_id | Altera um produto
-DELETE | /produto/:_id | Deleta um produto
+DELETE | /produto/:_id | Apaga um produto
 GET | /tipos | Retorna todos os tipos
 GET | /tipos/:_id | Retorna um tipo
 POST | /tipos | Adiciona um tipo
 PATCH | /tipos/:_id | Altera um tipo
-DELETE | /tipos/:_id | Deleta um tipo
+DELETE | /tipos/:_id | Apaga um tipo
 GET | /fabricantes | Retorna todos os fabricantes
 GET | /fabricantes/:_id | Retorna um fabricante
 POST | /fabricantes | Adiciona um fabricante
 PATCH | /fabricante/:_id | Altera um fabricante
-DELETE | /fabricante/:_id | Deleta um fabricante
+DELETE | /fabricante/:_id | Apaga um fabricante
 
 Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV4YvT).
 
@@ -84,7 +83,7 @@ Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV
 
 ```
 {
-    "_id": "5fcd57a039b60012dcfecaae",
+    "_id": "5fd22a4447500b0024102546",
     "nome": "Margarina Becel",
     "tipo": "Alimentício",
     "fabricante": "Unilever",
@@ -93,8 +92,9 @@ Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV
         "Vitamina D3"
     ],
     "imagem_url": "https://casafiesta.fbitsstatic.net/img/p/creme-vegetal-becel-original-com-sal-250g-86113/251869.jpg",
-    "data_criacao": "2020-12-06T22:13:52.361Z",
-    "data_ultima_atualizacao": "2020-12-10T13:27:31.965Z"
+    "media_preco": "R$ 7.00",
+    "data_criacao": "2020-12-10T14:01:40.170Z",
+    "data_ultima_atualizacao": "2020-12-10T17:28:30.165Z"
 }
 ```
 
