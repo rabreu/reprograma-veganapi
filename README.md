@@ -43,8 +43,15 @@ updatedAt | Date | Data do último update gerada automaticamente. | -
 ### Tipo
 Campo | Tipo | Descrição | Obrigatório?
 ------ | ------- | --------- | ---------:
-_id | ObjectId | Retorna todos os produtos. | -
-nome | String | Retorna um produto. | Sim
+_id | ObjectId | Id gerado automaticamente | -
+nome | String | Nome do tipo | Sim
+
+### Fabricante
+Campo | Tipo | Descrição | Obrigatório?
+------ | ------- | --------- | ---------:
+_id | ObjectId | Id gerado automaticamente | -
+nome | String | Nome do fabricante | Sim
+observacao | String | Campo livre para observação sobre o fabricante | Não
 
 ## Endpoints
 
@@ -54,13 +61,20 @@ GET | /produtos | Retorna uma lista de produtos, podendo ser filtrada por parâm
 GET | /produtos/:_id | Retorna um produto por id.
 POST | /produtos | Adiciona um produto.
 POST | /produtos/lista | Adiciona uma _array_ de produtos.
-PUT | /produtos/:_id | Altera um produto.
+PATCH | /produtos/:_id | Altera um produto.
 DELETE | /produto/:_id | Deleta um produto.
 GET | /tipos | Retorna todos os tipos.
 GET | /tipos/:_id | Retorna um tipo.
 POST | /tipos | Adiciona um tipo.
-PUT | /tipo/:_id | Altera um tipo.
-DELETE | /tipo/:_id | Deleta um tipo.
+PATCH | /tipos/:_id | Altera um tipo.
+DELETE | /tipos/:_id | Deleta um tipo.
+GET | /fabricantes | Retorna todos os fabricantes.
+GET | /fabricantes/:_id | Retorna um fabricante.
+POST | /fabricantes | Adiciona um fabricante.
+PATCH | /fabricante/:_id | Altera um fabricante.
+DELETE | /fabricante/:_id | Deleta um fabricante.
+
+[Postman](https://documenter.getpostman.com/view/10647633/TVmV4YvT)
 
 ### Exemplo de um produto
 
@@ -76,7 +90,7 @@ DELETE | /tipo/:_id | Deleta um tipo.
     ],
     "imagem_url": "https://casafiesta.fbitsstatic.net/img/p/creme-vegetal-becel-original-com-sal-250g-86113/251869.jpg",
     "data_criacao": "2020-12-06T22:13:52.361Z",
-    "data_ultima_atualizacao": "2020-12-06T22:13:52.361Z"
+    "data_ultima_atualizacao": "2020-12-10T13:27:31.965Z"
 }
 ```
 
@@ -85,3 +99,4 @@ DELETE | /tipo/:_id | Deleta um tipo.
 - Cadastro de usuários
 - Submissão de revisão de informações por parte dos usuários
 - Versões do mesmo produto por país, pois a receita é comumente alterada conforme a região.
+- Cadastro de ingredientes que não sejam veganos e explicação.
