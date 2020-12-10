@@ -11,6 +11,7 @@ class ProdutoDTO {
         this.ingredientesorigemanimal = produto.ingredientesorigemanimal;
         this.imagem_url = produto.imagem_url;
         this.observacao = produto.observacao;
+        this.media_preco = "R$ " + produto.media_preco.toFixed(2);
         this.data_criacao = produto.createdAt;
         this.data_ultima_atualizacao = produto.updatedAt;
     }

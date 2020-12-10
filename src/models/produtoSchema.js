@@ -29,7 +29,12 @@ const produtoSchema = new Schema({
         type: Array,
         default: null,
         required: false
-    }, 
+    },
+    media_preco: {
+        type: Number,
+        default: 0,
+        required: false
+    },
     imagem_url: {
         type: String,
         required: false
