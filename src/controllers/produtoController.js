@@ -5,6 +5,7 @@ const ProdutoDTO = require("../DTO/ProdutoDTO")
 const API_PATH = process.env.API_PATH
 const dotenv = require('dotenv')
 const Message = require("../helpers/Message")
+const fabricanteCollection = require("../models/fabricanteSchema")
 
 dotenv.config()
 
@@ -18,6 +19,17 @@ const getProdutos = async (req, res) => {
                     return res.status(500).send(new ErrorMessage(500, err));
                 if (tipo)
                     resolve(tipo._id);
+                resolve(null);
+            })
+        })
+    }
+    if (query.hasOwnProperty("fabricante")) {
+        query.fabricante = await new Promise((resolve) => {
+            fabricanteCollection.findOne({ nome: query.fabricante }, (err, fabricante) => {
+                if (err)
+                    return res.status(500).send(new ErrorMessage(500, err));
+                if (fabricante)
+                    resolve(fabricante._id);
                 resolve(null);
             })
         })
