@@ -4,6 +4,7 @@ const ErrorMessage = require("../helpers/ErrorMessage")
 const ProdutoDTO = require("../DTO/ProdutoDTO")
 const API_PATH = process.env.API_PATH
 const dotenv = require('dotenv')
+const Message = require("../helpers/Message")
 
 dotenv.config()
 
@@ -14,7 +15,7 @@ const getProdutos = async (req, res) => {
         query.tipo = await new Promise((resolve) => {
             tipoCollection.findOne({ nome: query.tipo }, (err, tipo) => {
                 if (err)
-                    return res.send(500).send(err);
+                    return res.status(500).send(new ErrorMessage(500, err));
                 if (tipo)
                     resolve(tipo._id);
                 resolve(null);
@@ -23,9 +24,9 @@ const getProdutos = async (req, res) => {
     }
     produtoCollection.find(query, (err, produtos) => {
         if (err)
-            return res.status(400).send(err);
+            res.status(500).send(new ErrorMessage(500, err));
         if (produtos.length < 1)
-            return res.status(404).send(new ErrorMessage("Não foram encontrados produtos com estes critérios. :("));
+            return res.status(200).send(new Message("Não foram encontrados produtos com estes critérios. :("));
         Promise.all(produtos.map(produto => {
             return new Promise((resolve, reject) => {
                 produto
@@ -44,7 +45,7 @@ const getProdutos = async (req, res) => {
                 return res.status(200).send(produtos);
             })
             .catch(err => {
-                res.status(500).send(err);
+                return res.status(500).send(new ErrorMessage(500, err));
             })
     })
 }
@@ -57,11 +58,11 @@ const getProdutoById = async (req, res) => {
         .populate('fabricante')
         .then(produto => {
             if (!produto)
-                return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
+                return res.status(200).send(new ErrorMessage("Produto não encontrado. :("));
             return res.status(200).send(new ProdutoDTO(produto));
         })
         .catch(err => {
-            return res.status(500).send(err);
+            return res.status(500).send(new ErrorMessage(500, err));
         })
 }
 
@@ -71,7 +72,7 @@ const addProduto = async (req, res) => {
     const saveProduto = new produtoCollection(produtoBody);
     saveProduto.save((err, produto) => {
         if (err)
-            return res.status(500).send(err);
+            return res.status(500).send(new ErrorMessage(500, err));
         produto
             .populate('tipo')
             .populate('fabricante')
@@ -80,7 +81,7 @@ const addProduto = async (req, res) => {
                 return res.status(201).send(new ProdutoDTO(produto));
             })
             .catch(err => {
-                return res.status(500).send(err);
+                return res.status(500).send(new ErrorMessage(500, err));
             })
     })
 }
@@ -93,15 +94,15 @@ const addProdutos = async (req, res) => {
             produtoCollection.create(produto)
                 .then((produtoAdicionado) => {
                     produtoAdicionado
-                    .populate('tipo')
-                    .populate('fabricante')
-                    .execPopulate()
-                    .then(produto => {
-                        resolve(new ProdutoDTO(produto));
-                    })
-                    .catch(err => {
-                        reject(err);
-                    })
+                        .populate('tipo')
+                        .populate('fabricante')
+                        .execPopulate()
+                        .then(produto => {
+                            resolve(new ProdutoDTO(produto));
+                        })
+                        .catch(err => {
+                            reject(err);
+                        })
                 })
                 .catch((err) => {
                     reject(err)
@@ -112,7 +113,7 @@ const addProdutos = async (req, res) => {
             return res.status(201).send(produtosAdicionados);
         })
         .catch((err) => {
-            return res.status(500).send(err);
+            return res.status(500).send(new ErrorMessage(500, err));
         })
 }
 
@@ -124,7 +125,7 @@ const updateProduto = (req, res) => {
         if (err)
             return res.status(500).send(err);
         if (!produto)
-            return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
+            return res.status(200).send(new Message("Produto não encontrado. :("));
         produto
             .populate('tipo')
             .populate('fabricante')
@@ -133,7 +134,7 @@ const updateProduto = (req, res) => {
                 return res.status(200).send(new ProdutoDTO(produto));
             })
             .catch(err => {
-                return res.status(500).send(err);
+                return res.status(500).send(new ErrorMessage(500, err));
             })
     })
 }
@@ -143,10 +144,10 @@ const deleteProduto = (req, res) => {
     const id = req.params.id;
     produtoCollection.findByIdAndDelete(id, (err, produto) => {
         if (err)
-            return res.status(400).send(err);
+            return res.status(500).send(new ErrorMessage(500, err));
         if (!produto)
-            return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
-        return res.status(200).send(new ErrorMessage("Produto apagado."));
+            return res.status(200).send(new Message("Produto não encontrado. :("));
+        return res.status(200).send(new Message("Produto apagado."));
     })
 }
 
