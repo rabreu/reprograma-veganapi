@@ -60,7 +60,7 @@ observacao | String | Campo livre para observação sobre o fabricante | Não
 
 Método | Caminho | Parâmetros | Descrição
 ------ | ------- | ------- | ---------:
-GET | /produtos | nome, vegan, tipo, preco_min, preco max | Retorna uma lista de produtos, podendo ser filtrada por parâmetros
+GET | /produtos | nome, vegan, tipo, fabricante, preco_min, preco max | Retorna uma lista de produtos, podendo ser filtrada por parâmetros
 GET | /produtos/:_id | - | Retorna um produto por id
 POST | /produtos | - | Adiciona um produto
 POST | /produtos/lista | - | Adiciona uma _array_ de produtos
