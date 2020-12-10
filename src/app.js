@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const API_PATH = process.env.API_PATH
 const dotenv = require('dotenv')
-
 dotenv.config()
+const API_PATH = process.env.API_PATH
+
 
 const db = require("./confs/database")
 db.connect()
