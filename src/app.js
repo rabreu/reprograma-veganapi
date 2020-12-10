@@ -12,12 +12,14 @@ db.connect()
 const indexRoute = require("./routes/indexRoute")
 const produtoRoutes = require("./routes/produtoRoutes")
 const tipoRoutes = require("./routes/tipoRoutes")
+const fabricanteRoutes = require("./routes/fabricanteRoutes")
 
 app.use(cors())
 app.use(express.json())
 app.use(API_PATH, indexRoute)
 app.use(API_PATH, produtoRoutes)
 app.use(API_PATH, tipoRoutes)
+app.use(API_PATH, fabricanteRoutes)
 app.use("/", (req, res) => {
     res.status(302).redirect(API_PATH);
 })

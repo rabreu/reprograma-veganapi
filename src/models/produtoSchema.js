@@ -14,10 +14,11 @@ const produtoSchema = new Schema({
     tipo: {
         type: Schema.Types.ObjectId,
         ref: 'tipos',
-        required: false
+        required: "Este campo é obrigatório."
     },
     fabricante: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'fabricantes',
         required: "Este campo é obrigatório."
     },
     vegan: {

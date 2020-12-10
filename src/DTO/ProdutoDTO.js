@@ -5,7 +5,8 @@ class ProdutoDTO {
         this.sabor = produto.sabor;
         if(produto.tipo)
             this.tipo = produto.tipo.nome;
-        this.fabricante = produto.fabricante;
+        if(produto.fabricante)
+            this.fabricante = produto.fabricante.nome;
         this.vegan = produto.vegan;
         this.ingredientesorigemanimal = produto.ingredientesorigemanimal;
         this.imagem_url = produto.imagem_url;

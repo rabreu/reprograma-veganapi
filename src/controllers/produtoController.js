@@ -28,12 +28,16 @@ const getProdutos = async (req, res) => {
             return res.status(404).send(new ErrorMessage("Não foram encontrados produtos com estes critérios. :("));
         Promise.all(produtos.map(produto => {
             return new Promise((resolve, reject) => {
-                produto.populate('tipo', (err, produto) => {
-                    if (err)
+                produto
+                    .populate('tipo')
+                    .populate('fabricante')
+                    .execPopulate()
+                    .then(produto => {
+                        resolve(new ProdutoDTO(produto));
+                    })
+                    .catch(err => {
                         reject(err);
-                    else 
-                        resolve(new ProdutoDTO(produto));              
-                })
+                    })
             })
         }))
             .then(produtos => {
@@ -48,7 +52,9 @@ const getProdutos = async (req, res) => {
 const getProdutoById = async (req, res) => {
     console.log(`${req.method} ${API_PATH}${req.url}`)
     const { id } = req.params
-    produtoCollection.findById(id).populate('tipo')
+    produtoCollection.findById(id)
+        .populate('tipo')
+        .populate('fabricante')
         .then(produto => {
             if (!produto)
                 return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
@@ -66,11 +72,16 @@ const addProduto = async (req, res) => {
     saveProduto.save((err, produto) => {
         if (err)
             return res.status(500).send(err);
-        produto.populate('tipo', (err, produto) => {
-            if (err)
+        produto
+            .populate('tipo')
+            .populate('fabricante')
+            .execPopulate()
+            .then(produto => {
+                return res.status(201).send(new ProdutoDTO(produto));
+            })
+            .catch(err => {
                 return res.status(500).send(err);
-            return res.status(201).send(new ProdutoDTO(produto));
-        });
+            })
     })
 }
 
@@ -81,11 +92,15 @@ const addProdutos = async (req, res) => {
         return new Promise((resolve, reject) => {
             produtoCollection.create(produto)
                 .then((produtoAdicionado) => {
-                    produtoAdicionado.populate('tipo', (err, produto) => {
-                        if (err)
-                            reject(err);
-                        else
-                            resolve(new ProdutoDTO(produto));
+                    produtoAdicionado
+                    .populate('tipo')
+                    .populate('fabricante')
+                    .execPopulate()
+                    .then(produto => {
+                        resolve(new ProdutoDTO(produto));
+                    })
+                    .catch(err => {
+                        reject(err);
                     })
                 })
                 .catch((err) => {
@@ -110,11 +125,16 @@ const updateProduto = (req, res) => {
             return res.status(500).send(err);
         if (!produto)
             return res.status(404).send(new ErrorMessage("Produto não encontrado. :("));
-        produto.populate('tipo', (err, produto) => {
-            if (err)
+        produto
+            .populate('tipo')
+            .populate('fabricante')
+            .execPopulate()
+            .then(produto => {
+                return res.status(200).send(new ProdutoDTO(produto));
+            })
+            .catch(err => {
                 return res.status(500).send(err);
-            return res.status(200).send(new ProdutoDTO(produto));
-        })
+            })
     })
 }
 
