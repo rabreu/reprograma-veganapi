@@ -99,9 +99,13 @@ Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV
 
 ## Instalação local
 
-``npm install``
+``$ npm install``
 
-``npm start``
+``$ npm start``
+
+## Deploy no Heroku
+
+https://reprograma-veganapi.herokuapp.com/VeganAPI/
 
 ## TODO
 
