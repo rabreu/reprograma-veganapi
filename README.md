@@ -97,6 +97,12 @@ Documentação no [Postman](https://documenter.getpostman.com/view/10647633/TVmV
 }
 ```
 
+## Instalação local
+
+``npm install``
+
+``npm start``
+
 ## TODO
 
 - Cadastro de usuários
